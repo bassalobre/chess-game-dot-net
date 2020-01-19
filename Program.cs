@@ -7,9 +7,9 @@ namespace ChessGame
     {
         static void Main(string[] args)
         {
-            var position = new Position(3, 4);
+            var board = new Board.Board(8, 8);
 
-            Console.WriteLine("Position: " + position);
+            Screnn.PrintBoard(board);
         }
     }
 }
