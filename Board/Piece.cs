@@ -17,10 +17,9 @@ namespace ChessGame.Board
             NumberOfMovements = 0;
         }
 
-        public void AddNumberOfMovements()
-        {
-            NumberOfMovements ++;
-        }
+        public void AddNumberOfMovements() => NumberOfMovements ++;
+
+        public void ReduceNumberOfMovements() => NumberOfMovements --;
 
         protected bool CanMove(Position position)
         {
