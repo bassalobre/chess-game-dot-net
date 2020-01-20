@@ -17,10 +17,7 @@ namespace ChessGame
                     try
                     {
                         Console.Clear();
-                        Screnn.PrintBoard(match.Board);
-                        Console.WriteLine();
-                        Console.WriteLine("Round: " + match.Round);
-                        Console.WriteLine("Waiting move: " + match.CurrentPlayer);
+                        Screnn.PrintMatch(match);
 
                         Console.WriteLine();
                         Console.Write("From: ");

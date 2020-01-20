@@ -8,15 +8,53 @@ namespace ChessGame
 {
     class Screnn
     {
+        public static void PrintMatch(ChessMatch match)
+        {
+            PrintBoard(match.Board);
+            Console.WriteLine();
+            PrintCatchedPieces(match);
+            Console.WriteLine();
+            Console.WriteLine("Round: " + match.Round);
+            Console.WriteLine("Waiting move: " + match.CurrentPlayer);
+        }
+
+        public static void PrintCatchedPieces(ChessMatch match)
+        {
+            Console.WriteLine("Catched pieces:");
+
+            Console.Write("White: ");
+            PrintGroup(match.CatchedPiecesByColor(Color.White));
+            Console.WriteLine();
+
+            Console.Write("Black: ");
+            var oldColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            PrintGroup(match.CatchedPiecesByColor(Color.Black));
+            Console.ForegroundColor = oldColor;
+            Console.WriteLine();
+        }
+
+        public static void PrintGroup(HashSet<Piece> pieces)
+        {
+            Console.Write("[ ");
+            foreach(Piece piece in pieces)
+            {
+                Console.Write(piece + " ");
+            }
+            Console.Write("]");
+        }
+
         public static void PrintBoard(Board.Board board)
         {
-            for(int i = 0; i < board.Rows; i++)
+            Console.WriteLine("  a b c d e f g h");
+            for (int i = 0; i < board.Rows; i++)
             {
                 Console.Write(8 - i + " ");
                 for(int j = 0; j < board.Columns; j++)
                 {
                     PrintPiece(board.Piece(i, j));
                 }
+                Console.Write(8 - i + " ");
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
@@ -27,7 +65,8 @@ namespace ChessGame
             var originalBackground = Console.BackgroundColor;
             var alteredBackground = ConsoleColor.DarkGray;
 
-            for(int i = 0; i < board.Rows; i++)
+            Console.WriteLine("  a b c d e f g h");
+            for (int i = 0; i < board.Rows; i++)
             {
                 Console.Write(8 - i + " ");
                 for(int j = 0; j < board.Columns; j++)
@@ -44,6 +83,7 @@ namespace ChessGame
                     PrintPiece(board.Piece(i, j));
                     Console.BackgroundColor = originalBackground;
                 }
+                Console.Write(8 - i + " ");
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
