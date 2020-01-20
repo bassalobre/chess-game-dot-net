@@ -20,6 +20,15 @@ namespace ChessGame
                     Console.WriteLine();
                     Console.Write("From: ");
                     var from = Screnn.GetChessPosition().ToPosition();
+
+                    var possiblePositions = match
+                        .Board
+                        .Piece(from)
+                        .PossibleMovements();
+                    Console.Clear();
+                    Screnn.PrintBoard(match.Board, possiblePositions);
+
+                    Console.WriteLine();
                     Console.Write("To: ");
                     var to = Screnn.GetChessPosition().ToPosition();
 
