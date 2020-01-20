@@ -10,13 +10,21 @@ namespace ChessGame
         {
             try
             {
-                var board = new Board.Board(8, 8);
-                board.PutPiece(new King(board, Color.Black), new Position(0, 4));
-                board.PutPiece(new King(board, Color.White), new Position(7, 4));
-                board.PutPiece(new Queen(board, Color.Black), new Position(0, 3));
-                board.PutPiece(new Queen(board, Color.White), new Position(7, 3));
+                var match = new ChessMatch();
 
-                Screnn.PrintBoard(board);
+                while(!match.Finished)
+                {
+                    Console.Clear();
+                    Screnn.PrintBoard(match.Board);
+
+                    Console.WriteLine();
+                    Console.Write("From: ");
+                    var from = Screnn.GetChessPosition().ToPosition();
+                    Console.Write("To: ");
+                    var to = Screnn.GetChessPosition().ToPosition();
+
+                    match.ExecuteMovement(from, to);
+                }
             }
             catch(BoardException exception)
             {

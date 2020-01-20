@@ -14,5 +14,10 @@
             Position = null;
             NumberOfMovements = 0;
         }
+
+        public void AddNumberOfMovements()
+        {
+            NumberOfMovements ++;
+        }
     }
 }
