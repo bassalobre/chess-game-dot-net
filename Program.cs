@@ -17,15 +17,13 @@ namespace ChessGame
                 board.PutPiece(new Queen(board, Color.White), new Position(7, 3));
 
                 Screnn.PrintBoard(board);
-
-                var position = new ChessPosition('a', 1);
-                Console.WriteLine(position);
-                Console.WriteLine(position.ToPosition());
             }
             catch(BoardException exception)
             {
                 Console.WriteLine(exception.Message);
             }
+
+            Console.ReadLine();
         }
     }
 }
