@@ -1,4 +1,6 @@
-﻿namespace ChessGame.Board
+﻿using System;
+
+namespace ChessGame.Board
 {
     abstract class Piece
     {
@@ -26,6 +28,26 @@
 
             return piece == null || piece.Color != Color;
         }
+
+        public bool ThereArePossibleMovements()
+        {
+            var matrix = PossibleMovements();
+
+            for (int i = 0; i < Board.Rows; i++)
+            {
+                for (int j = 0; j < Board.Columns; j++)
+                {
+                    if(matrix[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public bool CanMoveToPosition(Position position) => PossibleMovements()[position.Row, position.Column];
 
         public abstract bool[,] PossibleMovements();
     }

@@ -14,25 +14,38 @@ namespace ChessGame
 
                 while(!match.Finished)
                 {
-                    Console.Clear();
-                    Screnn.PrintBoard(match.Board);
+                    try
+                    {
+                        Console.Clear();
+                        Screnn.PrintBoard(match.Board);
+                        Console.WriteLine();
+                        Console.WriteLine("Round: " + match.Round);
+                        Console.WriteLine("Waiting move: " + match.CurrentPlayer);
 
-                    Console.WriteLine();
-                    Console.Write("From: ");
-                    var from = Screnn.GetChessPosition().ToPosition();
+                        Console.WriteLine();
+                        Console.Write("From: ");
+                        var from = Screnn.GetChessPosition().ToPosition();
+                        match.ValidateFromPosition(from);
 
-                    var possiblePositions = match
-                        .Board
-                        .Piece(from)
-                        .PossibleMovements();
-                    Console.Clear();
-                    Screnn.PrintBoard(match.Board, possiblePositions);
+                        var possiblePositions = match
+                            .Board
+                            .Piece(from)
+                            .PossibleMovements();
+                        Console.Clear();
+                        Screnn.PrintBoard(match.Board, possiblePositions);
 
-                    Console.WriteLine();
-                    Console.Write("To: ");
-                    var to = Screnn.GetChessPosition().ToPosition();
+                        Console.WriteLine();
+                        Console.Write("To: ");
+                        var to = Screnn.GetChessPosition().ToPosition();
+                        match.ValidateToPosition(from, to);
 
-                    match.ExecuteMovement(from, to);
+                        match.PerformMove(from, to);
+                    }
+                    catch(BoardException exception)
+                    {
+                        Console.WriteLine(exception.Message);
+                        Console.ReadLine();
+                    }
                 }
             }
             catch(BoardException exception)
